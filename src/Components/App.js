@@ -6,7 +6,7 @@ import { Statements } from "./Statements.js";
 function App() {
   return (
     <div className="App">
-      <div><h1>Expense Tracker</h1></div>
+      <div className="heading"><h2>Expense Tracker</h2></div>
       <Expense />
       <Statements />
       <AddExpense />
