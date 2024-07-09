@@ -58,6 +58,7 @@ code {
   justify-content: center;
   align-items: center;
   background-color: green;
+  color: white;
 }
 
 .Debit{
@@ -66,6 +67,7 @@ code {
   justify-content: center;
   align-items: center;
   background-color: red;
+  color: white;
 }
 
 .Total{
@@ -75,6 +77,7 @@ code {
   justify-content: center;
   align-items: center;
   background-color: blue;
+  color: white;
 }
 
 .statements-container{
