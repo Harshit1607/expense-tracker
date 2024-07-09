@@ -16,12 +16,16 @@ export const Statements = () => {
   
   return (
     <div className='statements-container'>
+      <div className='statement statement-heading' >
+          <span>Information</span>
+          <span>Amount</span>
+        </div>
       {status === 'loading' && <p>Loading...</p>}
       {status === 'failed' && <p>Error: {error}</p>}
       {status === 'suceeded' && expenses.map((expense)=>(
           <div className='statement' key={expense._id} onClick={()=>deleteExpense(expense._id)}>
           <span>{expense.text}</span>
-          <span>{expense.money}</span>
+          <span>Rs.{expense.money}</span>
         </div>
       ))}
       

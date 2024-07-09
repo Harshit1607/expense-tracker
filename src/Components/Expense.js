@@ -15,9 +15,9 @@ export const Expense = () => {
   const totalExpense = totalCredit + totalDebit;
   return (
     <div className='expense-container'>
-      <div className='Credit'>{totalCredit}</div>
-      <div className='Debit'>{totalDebit}</div>
-      <div className='Total'>{totalExpense}</div>
+      <div className='Credit'>Incominng- Rs.{totalCredit}</div>
+      <div className='Debit'>Outgoing- Rs.{totalDebit}</div>
+      <div className='Total'> Total- Rs.{totalExpense}</div>
     </div>
   )
 }
