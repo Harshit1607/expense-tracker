@@ -43,6 +43,21 @@ app.get("/", async (req, res)=>{
   }
 })
 
+app.post("/", async (req, res)=>{
+  const newText = req.body.text;
+  const newMoney = req.body.money;
+  try{
+    const expense = new Expense({
+      text: newText,
+      money: newMoney
+    })
+    await expense.save();
+    res.redirect("/");
+  }catch(err){
+    console.log(err)
+  }
+})
+
 app.listen(port,  () => {
   console.log(`Server running on port ${port}`);
 })
