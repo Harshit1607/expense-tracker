@@ -13,6 +13,11 @@ export const addExpenses = createAsyncThunk('expenses/addExpenses', async ({text
   return result.data;
 } )
 
+export const deleteExpenses = createAsyncThunk('expenses/deleteExpenses', async (id)=>{
+  await axios.delete(`${API_URL}${id}`);
+  return id;
+} )
+
 const initialState = {
   expenses: [],
   credit: [],
@@ -49,6 +54,12 @@ const trackerSlice = createSlice({
             return{
               ...state,
               expenses: [...state.expenses, action.payload]
+            }
+          })
+          .addCase(deleteExpenses.fulfilled, (state, action)=>{
+            return{
+              ...state,
+              expenses: state.expense.filter((expense)=>expense._id !== action.payload)
             }
           })
   }

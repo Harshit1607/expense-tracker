@@ -58,6 +58,16 @@ app.post("/", async (req, res)=>{
   }
 })
 
+app.delete("/:id", async (req, res)=>{
+  const id = req.params.id;
+  try{
+    await Expense.deleteOne({_id: id});
+    res.redirect("/");
+  }catch (err){
+
+  }
+})
+
 app.listen(port,  () => {
   console.log(`Server running on port ${port}`);
 })
