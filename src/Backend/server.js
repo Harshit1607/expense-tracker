@@ -1,8 +1,7 @@
 import express from 'express';
 import bodyParser from "body-parser";
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 import cors from 'cors'
-
 
 const app = express();
 const port = 5000;
@@ -24,4 +23,26 @@ const expenseSchema = new mongoose.Schema({
     type: Number,
     required: true,
   }
+})
+
+const Expense = mongoose.model("Expense", expenseSchema);
+
+// const expense = new Expense({
+//   text: "first",
+//   money: 10
+// })
+// expense.save();
+
+app.get("/", async (req, res)=>{
+  try{
+    const expenses = await Expense.find();
+    console.log(expenses)
+    res.json(expenses);
+  } catch (err){
+    console.log(err)
+  }
+})
+
+app.listen(port,  () => {
+  console.log(`Server running on port ${port}`);
 })
