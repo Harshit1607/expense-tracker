@@ -25,18 +25,29 @@ const expenseSchema = new mongoose.Schema({
   }
 })
 
+const userSchema = new mongoose.Schema({
+  user : {
+    type: String,
+    required: true,
+    unique: true
+  },
+  email : {
+    type: String,
+    required: true,
+  },
+  pass : {
+    type: String,
+    required: true
+  }
+})
+
 const Expense = mongoose.model("Expense", expenseSchema);
+const User = mongoose.model("User", userSchema);
 
-// const expense = new Expense({
-//   text: "first",
-//   money: 10
-// })
-// expense.save();
 
-app.get("/", async (req, res)=>{
+app.get("/", cors(), async (req, res)=>{
   try{
     const expenses = await Expense.find();
-    console.log(expenses)
     res.json(expenses);
   } catch (err){
     console.log(err)
@@ -52,7 +63,8 @@ app.post("/", async (req, res)=>{
       money: newMoney
     })
     await expense.save();
-    res.redirect("/");
+    const expenses = await Expense.find();
+    res.json(expenses);
   }catch(err){
     console.log(err)
   }
@@ -62,7 +74,8 @@ app.delete("/:id", async (req, res)=>{
   const id = req.params.id;
   try{
     await Expense.deleteOne({_id: id});
-    res.redirect("/");
+    const expenses = await Expense.find();
+    res.json(expenses);
   }catch (err){
 
   }

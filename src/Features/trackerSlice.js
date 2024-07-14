@@ -14,14 +14,19 @@ export const addExpenses = createAsyncThunk('expenses/addExpenses', async ({text
 } )
 
 export const deleteExpenses = createAsyncThunk('expenses/deleteExpenses', async (id)=>{
-  await axios.delete(`${API_URL}${id}`);
-  return id;
+  const result =await axios.delete(`${API_URL}${id}`);
+  return result.data;
 } )
 
 const initialState = {
+  todoState : {
   expenses: [],
   credit: [],
   debit: [],
+  },
+  userState : {
+
+  }
 }
 
 const trackerSlice = createSlice({
@@ -31,36 +36,42 @@ const trackerSlice = createSlice({
   extraReducers: builder => {
     builder
           .addCase(fetchExpenses.pending, (state) => {
-            state.status = 'loading';
+            state.todoState.status = 'loading';
           })
-          .addCase(fetchExpenses.fulfilled, (state, action) => {
-            state.credit = [];
-            state.debit = [];
-            state.status = "suceeded";
-            state.expenses = action.payload;
-            state.expenses.map((expense)=>{
+          .addCase(fetchExpenses.fulfilled, (state = initialState.todoState, action) => {
+            state.todoState.status = "suceeded";
+            state.todoState.expenses = action.payload;
+            state.todoState.expenses.map((expense)=>{
               if(expense.money >= 0){
-                state.credit.push(expense.money);
+                state.todoState.credit.push(expense.money);
               } else{
-                state.debit.push(expense.money);
+                state.todoState.debit.push(expense.money);
               }
             })
           })
           .addCase(fetchExpenses.rejected, (state, action) => {
-            state.status = 'failed';
-            state.error = action.error.message;
+            state.todoState.status = 'failed';
+            state.todoState.error = action.error.message;
           })
-          .addCase(addExpenses.fulfilled, (state, action)=>{
-            return{
-              ...state,
-              expenses: [...state.expenses, action.payload]
-            }
+          .addCase(addExpenses.fulfilled, (state = initialState.todoState, action)=>{
+            state.todoState.expenses = action.payload;
+            state.todoState.expenses.map((expense)=>{
+              if(expense.money >= 0){
+                state.todoState.credit.push(expense.money);
+              } else{
+                state.todoState.debit.push(expense.money);
+              }
+            })
           })
-          .addCase(deleteExpenses.fulfilled, (state, action)=>{
-            return{
-              ...state,
-              expenses: state.expense.filter((expense)=>expense._id !== action.payload)
-            }
+          .addCase(deleteExpenses.fulfilled, (state = initialState.todoState, action)=>{
+            state.todoState.expenses = action.payload;
+            state.todoState.expenses.map((expense)=>{
+              if(expense.money >= 0){
+                state.todoState.credit.push(expense.money);
+              } else{
+                state.todoState.debit.push(expense.money);
+              }
+            })
           })
   }
 })

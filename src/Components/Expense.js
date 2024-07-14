@@ -2,9 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 export const Expense = () => {
-  const {credit, debit} = useSelector(state => state.expenses)
+  const {credit, debit} = useSelector(state => state.expenses.todoState)
 
-  
 
   const totalCredit = credit.reduce((acc, curr)=>{
     return acc+curr;
