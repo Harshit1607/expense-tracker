@@ -4,19 +4,49 @@ import axios from "axios";
 const API_URL='http://localhost:5000/';
 
 export const fetchExpenses = createAsyncThunk('expenses/fetchExpenses', async ()=>{
-  const result = await axios.get(API_URL);
+try{  
+  const result = await axios.get(API_URL, {headers: {authorization: localStorage.getItem('token')}});
   return result.data;
+} catch(err){
+  alert(err)
+}
 } )
 
 export const addExpenses = createAsyncThunk('expenses/addExpenses', async ({text, money})=>{
+try{
   const result = await axios.post(API_URL, {text, money});
   return result.data;
+} catch(err){
+  alert(err)
+}
 } )
 
 export const deleteExpenses = createAsyncThunk('expenses/deleteExpenses', async (id)=>{
+try{
   const result =await axios.delete(`${API_URL}${id}`);
   return result.data;
-} )
+} catch(err){
+  alert(err)
+}
+})
+
+export const signup = createAsyncThunk('user/signup', async({user, email, pass})=>{
+try{
+  const result = await axios.post(`${API_URL}signup`, {user, email, pass});
+  return result.data;
+} catch(err){
+  alert(err)
+}
+})
+
+export const login = createAsyncThunk('user/login', async({user, email, pass})=>{
+try{  
+  const result = await axios.post(`${API_URL}login`, {user, email, pass});
+  return result.data;
+} catch(err){
+  alert(err)
+}
+})
 
 const initialState = {
   todoState : {
@@ -25,7 +55,9 @@ const initialState = {
   debit: [],
   },
   userState : {
-
+    user: '',
+    token: localStorage.getItem('token')? localStorage.getItem('token') : '',
+    userId: localStorage.getItem('userId')? localStorage.getItem('userId') : '',
   }
 }
 
@@ -38,7 +70,10 @@ const trackerSlice = createSlice({
           .addCase(fetchExpenses.pending, (state) => {
             state.todoState.status = 'loading';
           })
-          .addCase(fetchExpenses.fulfilled, (state = initialState.todoState, action) => {
+          .addCase(fetchExpenses.fulfilled, (state, action) => {
+            state.todoState.expenses = [];
+            state.todoState.credit = [];
+            state.todoState.debit = [];
             state.todoState.status = "suceeded";
             state.todoState.expenses = action.payload;
             state.todoState.expenses.map((expense)=>{
@@ -53,7 +88,10 @@ const trackerSlice = createSlice({
             state.todoState.status = 'failed';
             state.todoState.error = action.error.message;
           })
-          .addCase(addExpenses.fulfilled, (state = initialState.todoState, action)=>{
+          .addCase(addExpenses.fulfilled, (state , action)=>{
+            state.todoState.expenses = [];
+            state.todoState.credit = [];
+            state.todoState.debit = [];
             state.todoState.expenses = action.payload;
             state.todoState.expenses.map((expense)=>{
               if(expense.money >= 0){
@@ -63,7 +101,10 @@ const trackerSlice = createSlice({
               }
             })
           })
-          .addCase(deleteExpenses.fulfilled, (state = initialState.todoState, action)=>{
+          .addCase(deleteExpenses.fulfilled, (state , action)=>{
+            state.todoState.expenses = [];
+            state.todoState.credit = [];
+            state.todoState.debit = [];
             state.todoState.expenses = action.payload;
             state.todoState.expenses.map((expense)=>{
               if(expense.money >= 0){
@@ -72,6 +113,17 @@ const trackerSlice = createSlice({
                 state.todoState.debit.push(expense.money);
               }
             })
+          })
+          .addCase(signup.fulfilled, (state, action)=>{
+
+            localStorage.setItem('token', action.payload.token);
+            state.userState.token = action.payload.token
+            console.log(action.payload.token)
+
+          })
+          .addCase(login.fulfilled, (state=initialState.userState, action)=>{
+            localStorage.setItem('token', action.payload.token);
+            state.userState.token = action.payload.token
           })
   }
 })

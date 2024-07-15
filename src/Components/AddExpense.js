@@ -18,7 +18,7 @@ export const AddExpense = () => {
   function addExpense(){
     dispatch(addExpenses({text, money}))
     setText("");
-    setMoney();
+    setMoney('');
   }
 
   return (

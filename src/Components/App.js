@@ -1,16 +1,21 @@
-import { AddExpense } from "./AddExpense.js";
-import { Expense } from "./Expense.js";
-import { Statements } from "./Statements.js";
-
-
+import { ExpenseTracker } from "./ExpenseTracker.js";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Login } from "./login.js";
+import { Signup } from "./signup.js";
+import { PrivateRoute } from "./PrivateRoute.js";
 function App() {
   return (
+    <Router>
     <div className="App">
-      <div className="heading"><h2>Expense Tracker</h2></div>
-      <Expense />
-      <Statements />
-      <AddExpense />
+      <Routes>
+      <Route element={<PrivateRoute />}>
+        <Route path='/' element={<ExpenseTracker />} />
+      </Route>
+      <Route path='/login' element={<Login />} />
+      <Route path='/signup' element={<Signup />} />
+      </Routes>
     </div>
+    </Router>
   );
 }
 
