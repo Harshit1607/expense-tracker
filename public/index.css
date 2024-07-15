@@ -7,11 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   height: 100vh;
-  font-family: "M PLUS Rounded 1c", sans-serif;
+  /* font-family: "M PLUS Rounded 1c", sans-serif;
   font-style: normal;
   font-family: "Caveat", cursive;
   font-optical-sizing: auto;
+  font-style: normal; */
+  font-family: "Saira", sans-serif;
+  font-optical-sizing: auto;
   font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
 code {
@@ -30,7 +35,24 @@ code {
 }
 
 .App{
-  width: 400px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.main{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.expense-tracker{
+  width: 350px;
   min-height: 500px;
   max-height: fit-content;
   display: flex;
@@ -48,6 +70,9 @@ code {
   align-items: center;
   padding: 0;
   margin: 0;
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .expense-container{
@@ -113,13 +138,14 @@ code {
   align-items: center;
   justify-content: space-between;
   height: 50px;
+  border-bottom: 1px dashed ;
 }
 
 .statement-heading{
   font-weight: bold;
 }
 
-.add{
+.logout-add{
   height: 50px;
   width: 100%;
   display: flex;
@@ -127,4 +153,110 @@ code {
   align-items: center;
   justify-content: space-around;
   border-top: solid
+}
+
+.logout{
+  align-self: center;
+  width: 80px;
+}
+
+.add-container{
+  width: 350px;
+  height: 500px;
+  max-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid;
+  border-radius: 25px;
+}
+
+.add-heading{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.add-input{
+  width: 100%;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.numpad{
+  width: 100%;
+  height: 300px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0;
+}
+
+.numpad-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.Auth-container{
+  width: 850px;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+}
+
+.Auth-left{
+  width: 350px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Auth-right{
+  width: 500px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Auth-right input{
+  width: 300px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  padding-left: 20px;
+  background: linear-gradient(135deg, #fff, #f5f5f5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.Auth-right button, .Auth-left button{
+  height: 42px;
+  border: 2px solid ;
+  border-radius: 40px;
+  width: 100px;
+  font-family: "Saira", sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+
+.Auth-right input::placeholder, .Auth-right input[type='text']{
+  font-family: "Saira", sans-serif;
 }

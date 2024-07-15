@@ -53,6 +53,7 @@ try{
 }
 })
 
+
 const initialState = {
   todoState : {
   expenses: [],
@@ -63,13 +64,20 @@ const initialState = {
     user: '',
     token: localStorage.getItem('token')? localStorage.getItem('token') : '',
     userId: localStorage.getItem('userId')? localStorage.getItem('userId') : '',
+  }, 
+  addContainer :{
+    hidden: false
   }
 }
 
 const trackerSlice = createSlice({
   name: 'expenses',
   initialState,
-  reducers: {},
+  reducers: {
+    hide: (state)=>{
+      state.addContainer.hidden = !state.addContainer.hidden
+    }
+  },
   extraReducers: builder => {
     builder
           .addCase(fetchExpenses.pending, (state) => {
@@ -136,3 +144,4 @@ const trackerSlice = createSlice({
 })
 
 export default trackerSlice.reducer;
+export const {hide} = trackerSlice.actions;
