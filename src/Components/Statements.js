@@ -5,13 +5,14 @@ import {fetchExpenses, deleteExpenses} from '../Features/trackerSlice.js'
 
 export const Statements = () => {
   const {expenses} = useSelector((state)=> state.expenses.todoState)
+  const userId = useSelector(state=>state.expenses.userState.userId);
   const dispatch = useDispatch();
   useEffect(()=>{
-    dispatch(fetchExpenses());
+    dispatch(fetchExpenses(userId));
   }, [])
 
-  function deleteExpense(id){
-    dispatch(deleteExpenses(id));
+  function deleteExpense({id, userId}){
+    dispatch(deleteExpenses({id, userId}));
   }
   
   return (
@@ -21,7 +22,7 @@ export const Statements = () => {
           <span>Amount</span>
         </div>
       {expenses.map((expense)=>(
-          <div className='statement' key={expense._id} onClick={()=>deleteExpense(expense._id)}>
+          <div className='statement' key={expense._id} onClick={()=>deleteExpense({id: expense._id, userId})}>
           <span>{expense.text}</span>
           <span>Rs.{expense.money}</span>
         </div>

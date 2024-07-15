@@ -24,6 +24,11 @@ const expenseSchema = new mongoose.Schema({
   money : {
     type: Number,
     required: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 })
 
@@ -48,8 +53,11 @@ const User = mongoose.model("User", userSchema);
 
 
 app.get("/", cors(), auth, async (req, res)=>{
+  const userId = (req.query.userId)
   try{
-    const expenses = await Expense.find();
+    console.log(userId)
+    const objectid = new mongoose.Types.ObjectId(userId);
+    const expenses = await Expense.find({userId: objectid});
     res.json(expenses);
   } catch (err){
     console.log(err)
@@ -59,13 +67,16 @@ app.get("/", cors(), auth, async (req, res)=>{
 app.post("/", async (req, res)=>{
   const newText = req.body.text;
   const newMoney = req.body.money;
+  const userId = req.body.userId
   try{
+    console.log(userId)
     const expense = new Expense({
       text: newText,
-      money: newMoney
+      money: newMoney,
+      userId: userId
     })
     await expense.save();
-    const expenses = await Expense.find();
+    const expenses = await Expense.find({userId: userId});
     res.json(expenses);
   }catch(err){
     console.log(err)
@@ -73,10 +84,11 @@ app.post("/", async (req, res)=>{
 })
 
 app.delete("/:id", async (req, res)=>{
+  const userId = req.body.userId;
   const id = req.params.id;
   try{
-    await Expense.deleteOne({_id: id});
-    const expenses = await Expense.find();
+    await Expense.deleteOne({_id: id, userId: userId});
+    const expenses = await Expense.find({userId: userId});
     res.json(expenses);
   }catch (err){
 

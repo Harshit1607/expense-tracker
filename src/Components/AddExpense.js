@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addExpenses } from '../Features/trackerSlice.js';
 
 export const AddExpense = () => {
   const [text, setText] = useState("");
   const [money, setMoney] = useState();
+  const userId = useSelector(state=>state.expenses.userState.userId);
   const dispatch = useDispatch();
 
   function handleText(event){
@@ -16,7 +17,7 @@ export const AddExpense = () => {
     setMoney(newMoney);
   }
   function addExpense(){
-    dispatch(addExpenses({text, money}))
+    dispatch(addExpenses({text, money, userId}))
     setText("");
     setMoney('');
   }

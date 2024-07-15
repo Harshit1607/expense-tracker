@@ -3,27 +3,32 @@ import axios from "axios";
 
 const API_URL='http://localhost:5000/';
 
-export const fetchExpenses = createAsyncThunk('expenses/fetchExpenses', async ()=>{
+export const fetchExpenses = createAsyncThunk('expenses/fetchExpenses', async (userId)=>{
 try{  
-  const result = await axios.get(API_URL, {headers: {authorization: localStorage.getItem('token')}});
+  const result = await axios.get(API_URL, {params: {
+    userId: userId
+  },
+  headers: 
+  {authorization: localStorage.getItem('token')   
+  }});
   return result.data;
 } catch(err){
   alert(err)
 }
 } )
 
-export const addExpenses = createAsyncThunk('expenses/addExpenses', async ({text, money})=>{
+export const addExpenses = createAsyncThunk('expenses/addExpenses', async ({text, money, userId})=>{
 try{
-  const result = await axios.post(API_URL, {text, money});
+  const result = await axios.post(API_URL, {text, money, userId});
   return result.data;
 } catch(err){
   alert(err)
 }
 } )
 
-export const deleteExpenses = createAsyncThunk('expenses/deleteExpenses', async (id)=>{
+export const deleteExpenses = createAsyncThunk('expenses/deleteExpenses', async ({id, userId})=>{
 try{
-  const result =await axios.delete(`${API_URL}${id}`);
+  const result =await axios.delete(`${API_URL}${id}`, {data: {userId: userId}});
   return result.data;
 } catch(err){
   alert(err)
@@ -115,15 +120,17 @@ const trackerSlice = createSlice({
             })
           })
           .addCase(signup.fulfilled, (state, action)=>{
-
+            localStorage.setItem('userId', action.payload.newUser._id)
             localStorage.setItem('token', action.payload.token);
             state.userState.token = action.payload.token
-            console.log(action.payload.token)
+            state.userState.userId = action.payload.newUser._id 
 
           })
-          .addCase(login.fulfilled, (state=initialState.userState, action)=>{
+          .addCase(login.fulfilled, (state, action)=>{
+            localStorage.setItem('userId', action.payload.existingUser._id)
             localStorage.setItem('token', action.payload.token);
             state.userState.token = action.payload.token
+            state.userState.userId = action.payload.existingUser._id; 
           })
   }
 })
