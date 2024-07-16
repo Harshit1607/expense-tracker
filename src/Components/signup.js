@@ -33,10 +33,6 @@ export const Signup = () => {
 
   return (
     <div className='Auth-container'>
-      <div className='Auth-left'>
-        <h3>Already a user, Login instead</h3>
-        <button onClick={()=>{navigate('/login');}}>Login</button>
-      </div>
       <div className='Auth-right'>
         <h2>Signup</h2>
         <input placeholder='username..' onChange={handleUser}/>
@@ -44,6 +40,9 @@ export const Signup = () => {
         <input placeholder='password...' onChange={handlePass} type='password'/>
         <button onClick={handleSubmit}>Signup</button>
         </div>
+        <div className='Auth-left'>
+        <p>Already a user, <a onClick={()=>{navigate('/login');}}>Login</a> instead</p>
+      </div>
     </div>
   )
 }

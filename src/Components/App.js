@@ -1,4 +1,4 @@
-import { ExpenseTracker } from "./ExpenseTracker.js";
+import { ExpenseTracker } from "./ExpenseTracker.jsx";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Login } from "./login.js";
 import { Signup } from "./signup.js";

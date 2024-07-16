@@ -17,10 +17,7 @@ export const Statements = () => {
   
   return (
     <div className='statements-container'>
-      <div className='statement statement-heading' >
-          <span>Information</span>
-          <span>Amount</span>
-        </div>
+      Trasactions
       {expenses.map((expense)=>(
           <div className='statement' key={expense._id} onClick={()=>deleteExpense({id: expense._id, userId})}>
           <span>{expense.text}</span>

@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addExpenses } from '../Features/trackerSlice.js';
 import { hide } from '../Features/trackerSlice.js';
+import BackspaceIcon from '@mui/icons-material/Backspace';
+import AddIcon from '@mui/icons-material/Add';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const Addcontainer = () => {
   const [text, setText] = useState("");
@@ -59,9 +62,9 @@ export const Addcontainer = () => {
       display: hidden? 'none' : '',
     }}>
       <div className='add-heading'>
-        <button onClick={handleHide}>&lt;</button>
-        <h2>Add Expenses</h2>
-        <button onClick={addExpense}>Add</button>
+        <ArrowBackIcon onClick={handleHide}/>
+        {/* <h2>Add Expenses</h2> */}
+        <AddIcon onClick={addExpense}/>
       </div>
       <div className='add-input'>
         <span>
@@ -85,9 +88,9 @@ export const Addcontainer = () => {
         <button className='numpad-button' onClick={numPad} value='7'>7</button>
         <button className='numpad-button' onClick={numPad} value='8'>8</button>
         <button className='numpad-button' onClick={numPad} value='9'>9</button>
-        <button className='numpad-button' onClick={numPad2} value='-'>-</button>
+        <button className='numpad-button corner-left' onClick={numPad2} value='-'>-</button>
         <button className='numpad-button' onClick={numPad} value='0'>0</button>
-        <button className='numpad-button' onClick={numPad3}>&lt;</button>
+        <button className='numpad-button corner-right' onClick={numPad3}><BackspaceIcon /></button>
       </div>
     </div>
   )

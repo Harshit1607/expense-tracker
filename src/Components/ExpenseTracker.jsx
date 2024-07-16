@@ -1,0 +1,54 @@
+import React, {useEffect} from 'react'
+import { Expense } from "./Expense.jsx";
+import { Statements } from "./Statements.js"; 
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
+import { Addcontainer } from './Addcontainer.jsx';
+import { hide } from '../Features/trackerSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
+import LogoutIcon from '@mui/icons-material/Logout.js';
+import AddIcon from '@mui/icons-material/Add';
+
+export const ExpenseTracker = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(state=>state.expenses.userState.user)
+  const hidden = useSelector(state=>state.expenses.addContainer.hidden)
+  useEffect(()=>{
+    const token = localStorage.getItem('token');
+    const tokenexp = (jwtDecode(token)).exp
+
+    const now = Date.now() / 1000
+
+    if(now>tokenexp){
+      localStorage.setItem('token', '')
+      localStorage.setItem('userId', '')
+      navigate('/login')
+    }
+  }, [])
+  return (
+    <div className='main'>
+    <div className='expense-tracker'>
+      <div className="heading">
+        <div className='greet'>
+          <span>Hello</span>
+          <span className='name'>{user}</span>
+        </div>
+        <LogoutIcon onClick={()=>{localStorage.setItem('token', '')
+           localStorage.setItem('userId', '')
+           localStorage.setItem('user', '')
+          navigate('/login')
+      }} />
+      </div>
+      <Expense />
+      <Statements />
+      <div className='logout-add'>
+        <AddIcon onClick={()=>{dispatch(hide())}} style={{
+          display: hidden? '' : 'none',
+        }}/>
+      </div>
+    </div>
+    <Addcontainer />
+    </div>
+  )
+}

@@ -34,10 +34,6 @@ export const Login = () => {
 
   return (
     <div className='Auth-container'>
-    <div className='Auth-left'>
-      <h3>New user, Signup instead</h3>
-      <button onClick={()=>{navigate('/signup');}}>Signup</button>
-    </div>
     <div className='Auth-right'>
       <h2>Login</h2>
       <input placeholder='username..' onChange={handleUser}/>
@@ -45,6 +41,9 @@ export const Login = () => {
       <input placeholder='password...' onChange={handlePass} type='password'/>
       <button onClick={handleSubmit}>Login</button>
       </div>
+      <div className='Auth-left'>
+      <p>New user, <a onClick={()=>{navigate('/signup');}}> Signup</a> instead</p>
+    </div>
   </div>
   )
 }

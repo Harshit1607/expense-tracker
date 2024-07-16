@@ -61,12 +61,12 @@ const initialState = {
   debit: [],
   },
   userState : {
-    user: '',
+    user: localStorage.getItem('user')? localStorage.getItem('user') : '',
     token: localStorage.getItem('token')? localStorage.getItem('token') : '',
     userId: localStorage.getItem('userId')? localStorage.getItem('userId') : '',
   }, 
   addContainer :{
-    hidden: false
+    hidden: true
   }
 }
 
@@ -128,17 +128,21 @@ const trackerSlice = createSlice({
             })
           })
           .addCase(signup.fulfilled, (state, action)=>{
+            localStorage.setItem('user', action.payload.newUser.user)
             localStorage.setItem('userId', action.payload.newUser._id)
             localStorage.setItem('token', action.payload.token);
             state.userState.token = action.payload.token
-            state.userState.userId = action.payload.newUser._id 
+            state.userState.userId = action.payload.newUser._id
+            state.userState.user = action.payload.newUser.user 
 
           })
           .addCase(login.fulfilled, (state, action)=>{
+            localStorage.setItem('user', action.payload.existingUser.user)
             localStorage.setItem('userId', action.payload.existingUser._id)
             localStorage.setItem('token', action.payload.token);
             state.userState.token = action.payload.token
             state.userState.userId = action.payload.existingUser._id; 
+            state.userState.user = action.payload.existingUser.user 
           })
   }
 })

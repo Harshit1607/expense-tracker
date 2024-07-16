@@ -17,6 +17,8 @@ body {
   font-style: normal;
   font-variation-settings:
     "wdth" 100;
+    background: rgb(197,149,247);
+background: radial-gradient(circle, rgba(197,149,247,0.062237394957983194) 0%, rgba(155,130,231,1) 75%, rgba(149,0,255,1) 100%);
 }
 
 code {
@@ -52,35 +54,64 @@ code {
   align-items: center;
 }
 .expense-tracker{
-  width: 350px;
+  width: 300px;
   min-height: 500px;
   max-height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   border: solid;
   border-radius: 25px;
+  background-color: #14131B;
+  color: #c6c6cb;
 }
 
 .heading{
-  width: 100%;
+  width: 90%;
   height: 50px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 0;
   margin: 0;
   font-family: "Chakra Petch", sans-serif;
   font-weight: 500;
   font-style: normal;
+  color: #c6c6cb;
+}
+
+.greet{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  font-size: 10px;
+  color: #8e8d92;
+}
+
+.name{
+  color: #c6c6cb;
+  font-size: 20px;
 }
 
 .expense-container{
-  width: 100%;
-  height: 120px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 0;
+  width: 80%;
+  height: 140px;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0; */
+}
+.slick-slide > div{
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slick-active> button{
+  background-color: #f5f5f5;
 }
 
 .Credit{
@@ -88,7 +119,7 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: green;
+  background-color: #9077d7;
   color: white;
   border-radius: 15px;
   border-bottom-left-radius: 10px;
@@ -100,24 +131,37 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: #9C80E7;
   color: white;
   border-radius: 15px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
-.Total{
-  grid-column: span 2;
-  height: 40px;
+
+.slick-slide #Total{
+  width: 100%;
+  height: 120px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background-color: blue;
-  color: white;
+  align-items: start;
+  padding: 0 10px;
+  background-color: #9B82E7;
+  color: #1D0A4C;
   border-radius: 15px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  font-size: 20px;
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
+}
+
+.Total:first-child{
+  font-size: 20px;
+}
+
+.balance{
+  font-size: 10px;
+  color: #403f43;
 }
 
 .statements-container{
@@ -132,13 +176,18 @@ code {
 }
 
 .statement{
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 0 5px;
   height: 50px;
-  border-bottom: 1px dashed ;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  background-color: #1B1B27;
+  color: #c6c6cb;
 }
 
 .statement-heading{
@@ -149,19 +198,39 @@ code {
   height: 50px;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border-top: solid
+  margin-bottom: 10px;
 }
 
+/* .logout-add button{
+  background-color: #9C80E7;
+  color: white;
+  border-radius: 10px;
+  border: #14121D;
+  margin-top: 5px;
+  
+} */
+.add-button{
+  background-color: #14131B;
+  color: #c6c6cb;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  
+}
 .logout{
-  align-self: center;
-  width: 80px;
+  background-color: #9C80E7;
+  border: none;
+  color: #1D0A4C;
+  height: 50px;
+  width: 60px;
+  border-radius: 10px;
 }
 
 .add-container{
-  width: 350px;
+  width: 300px;
   height: 500px;
   max-height: fit-content;
   display: flex;
@@ -169,6 +238,8 @@ code {
   justify-content: center;
   border: solid;
   border-radius: 25px;
+  background-color: #14121D;
+  color: #c6c6cb;
 }
 
 .add-heading{
@@ -183,20 +254,41 @@ code {
   font-family: "Chakra Petch", sans-serif;
   font-weight: 500;
   font-style: normal;
+  color: #c6c6cb;
 }
+
+.add-heading button{
+  background-color: #14131B;
+  color: #c6c6cb;
+  border: none;
+  cursor: pointer;
+
+}
+
 
 .add-input{
   width: 100%;
-  height: 75px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+}
+
+.add-input input{
+  width: 80%;
+  height: 30px;
+  padding-left: 10px;
+  border-radius: 10px;
+  background-color: #c6c6cb;
+  border-color: #c6c6cb;
+  box-shadow: 0 4px 8px rgba(198, 198, 203, 0.5);
 }
 
 .numpad{
   width: 100%;
-  height: 300px;
+  height: 250px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -204,32 +296,44 @@ code {
 }
 
 .numpad-button{
+  background-color: #1B1B27;
+  color: #c6c6cb;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 0.2px solid #c6c6cb;
+}
+.corner-left{
+  border-bottom-left-radius: 25px;
+}
+.corner-right{
+  border-bottom-right-radius: 25px;
 }
 
 
 .Auth-container{
-  width: 850px;
-  height: 300px;
+  width: 300px;
+  height: 500px;
+  max-height: fit-content;
   display: flex;
-  flex-direction: row;
-  justify-self: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: solid;
+  border-radius: 25px;
+  background-color: #14121D;
+  color: #c6c6cb;
 }
 
 .Auth-left{
-  width: 350px;
-  height: 300px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .Auth-right{
-  width: 500px;
-  height: 300px;
+  width: 100%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -237,23 +341,30 @@ code {
 }
 
 .Auth-right input{
-  width: 300px;
-  height: 40px;
+  width: 80%;
+  height: 30px;
   border-radius: 20px;
   border: none;
   padding-left: 20px;
-  background: linear-gradient(135deg, #fff, #f5f5f5);
+  background: linear-gradient(135deg, #c6c6cb, #f5f5f5);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.Auth-right button, .Auth-left button{
+.Auth-right button{
   height: 42px;
   border: 2px solid ;
   border-radius: 40px;
   width: 100px;
+  background-color: #9C80E7;
   font-family: "Saira", sans-serif;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+}
+
+.Auth-left a{
+  text-decoration: underline;
+  color: #9C80E7;
+  cursor: pointer
 }
 
 
