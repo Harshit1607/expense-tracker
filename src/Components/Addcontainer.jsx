@@ -62,9 +62,9 @@ export const Addcontainer = () => {
       display: hidden? 'none' : '',
     }}>
       <div className='add-heading'>
-        <ArrowBackIcon onClick={handleHide}/>
+        <ArrowBackIcon onClick={handleHide} style={{'cursor': 'pointer', 'marginLeft':'10px'}}/>
         {/* <h2>Add Expenses</h2> */}
-        <AddIcon onClick={addExpense}/>
+        <AddIcon onClick={addExpense} style={{'cursor': 'pointer', 'marginRight':'10px'}}/>
       </div>
       <div className='add-input'>
         <span>

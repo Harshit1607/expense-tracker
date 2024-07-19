@@ -1,3 +1,7 @@
+button {
+  cursor: pointer;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -50,12 +54,12 @@ code {
   height: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 .expense-tracker{
   width: 300px;
-  min-height: 500px;
+  height: 530px;
   max-height: fit-content;
   display: flex;
   flex-direction: column;
@@ -65,11 +69,12 @@ code {
   border-radius: 25px;
   background-color: #14131B;
   color: #c6c6cb;
+  position: relative;
 }
 
 .heading{
   width: 90%;
-  height: 50px;
+  height: 9.5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,64 +100,37 @@ code {
 }
 
 .expense-container{
-  width: 80%;
-  height: 140px;
-  /* display: grid;
-  grid-template-columns: 1fr 1fr; */
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  column-gap: 0; */
+  width: 100%;
+  height: 41.5%;
 }
+
+
 .slick-slide > div{
   margin: 0 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #9B82E7;
+  color: #1D0A4C;
+  border-radius: 15px;
 }
 .slick-active> button{
   background-color: #f5f5f5;
 }
 
-.Credit{
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #9077d7;
-  color: white;
-  border-radius: 15px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
 
-.Debit{
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #9C80E7;
-  color: white;
-  border-radius: 15px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-
-.slick-slide #Total{
+ #Total{
   width: 100%;
-  height: 120px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  padding: 0 10px;
+  padding: 0 0px;
   background-color: #9B82E7;
   color: #1D0A4C;
   border-radius: 15px;
-  font-size: 20px;
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
+  font-size: 30px;
 }
 
 .Total:first-child{
@@ -160,7 +138,7 @@ code {
 }
 
 .balance{
-  font-size: 10px;
+  font-size: 12px;
   color: #403f43;
 }
 
@@ -169,10 +147,19 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 280px;
-  max-height: fit-content;
+  min-height: 180px;
+  max-height: 180px;
   padding-left: 20px;
   padding-right: 20px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer and Edge */
+}
+
+
+.statements-container::-webkit-scrollbar {
+  display: none;
 }
 
 .statement{
@@ -181,17 +168,28 @@ code {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5px;
-  height: 50px;
+  min-height: 40px;
   margin-top: 5px;
   margin-bottom: 5px;
   border-radius: 20px;
+  font-size: 12px;
   background-color: #1B1B27;
   color: #c6c6cb;
+  cursor: pointer;
 }
 
-.statement-heading{
-  font-weight: bold;
+.statement span{
+  margin: 0 25px;
+}
+
+.statement-heading {
+  position: sticky;
+  top: 0;
+  background-color: #14131B; /* same as the container's background */
+  z-index: 1; /* Ensure it stays above the scrolling content */
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .logout-add{
@@ -204,14 +202,7 @@ code {
   margin-bottom: 10px;
 }
 
-/* .logout-add button{
-  background-color: #9C80E7;
-  color: white;
-  border-radius: 10px;
-  border: #14121D;
-  margin-top: 5px;
-  
-} */
+
 .add-button{
   background-color: #14131B;
   color: #c6c6cb;
@@ -231,7 +222,7 @@ code {
 
 .add-container{
   width: 300px;
-  height: 500px;
+  height: 530px;
   max-height: fit-content;
   display: flex;
   flex-direction: column;
@@ -284,11 +275,12 @@ code {
   background-color: #c6c6cb;
   border-color: #c6c6cb;
   box-shadow: 0 4px 8px rgba(198, 198, 203, 0.5);
+  margin-bottom: 20px;
 }
 
 .numpad{
   width: 100%;
-  height: 250px;
+  height: 380px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -313,7 +305,7 @@ code {
 
 .Auth-container{
   width: 300px;
-  height: 500px;
+  height: 530px;
   max-height: fit-content;
   display: flex;
   flex-direction: column;
@@ -333,16 +325,16 @@ code {
 
 .Auth-right{
   width: 100%;
-  height: 50%;
+  height: 55%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 .Auth-right input{
-  width: 80%;
-  height: 30px;
+  width: 70%;
+  height: 35px;
   border-radius: 20px;
   border: none;
   padding-left: 20px;
@@ -371,3 +363,49 @@ code {
 .Auth-right input::placeholder, .Auth-right input[type='text']{
   font-family: "Saira", sans-serif;
 }
+
+
+@media (max-width: 768px) {
+  .expense-tracker,
+  .add-container,
+  .Auth-container {
+    height: 100vh;
+    max-height: none;
+  }
+}
+
+.slick-prev {
+  position: absolute;
+  right: -200px; /* Adjust as needed */
+}
+
+.slick-next {
+  margin-left: -200px; /* Adjust as needed */
+}
+
+/* Basic Arrow Styles */
+.slick-prev, .slick-next {
+  /* background-color: #14131B !important; Change background color */
+  color: #c6c6cb !important; /* Change arrow color */
+  border-radius: 50% !important; /* Make arrows circular */
+  width: 40px !important; /* Width of arrows */
+  height: 40px !important; /* Height of arrows */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 1 !important; /* Ensure arrows are above other elements */
+}
+
+
+
+/* Custom positioning */
+.slick-prev {
+  left:-10px !important; /* Adjust as needed */
+}
+
+.slick-next {
+  right: -10px !important; /* Adjust as needed */
+}
+
+
+

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { Expense } from "./Expense.jsx";
+import Expense  from "./Expense.jsx";
 import { Statements } from "./Statements.js"; 
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +28,9 @@ export const ExpenseTracker = () => {
   }, [])
   return (
     <div className='main'>
-    <div className='expense-tracker'>
+    <div className='expense-tracker' style={{
+          display: hidden? '' : 'none',
+        }}>
       <div className="heading">
         <div className='greet'>
           <span>Hello</span>
@@ -38,14 +40,12 @@ export const ExpenseTracker = () => {
            localStorage.setItem('userId', '')
            localStorage.setItem('user', '')
           navigate('/login')
-      }} />
+      }} style={{'cursor': 'pointer'}}/>
       </div>
       <Expense />
       <Statements />
       <div className='logout-add'>
-        <AddIcon onClick={()=>{dispatch(hide())}} style={{
-          display: hidden? '' : 'none',
-        }}/>
+        <AddIcon onClick={()=>{dispatch(hide())}} style={{'cursor': 'pointer'}}/>
       </div>
     </div>
     <Addcontainer />

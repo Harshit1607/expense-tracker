@@ -4,7 +4,18 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const Expense = () => {
+function Custom({item}){
+      return(
+        <div className='Total' id='Total'>
+        <span className='balance'>{item.type}</span>
+        <span>Rs.{item.money}</span>
+      </div>
+      )
+    }
+  
+
+
+function Expense(){
   const {credit, debit} = useSelector(state => state.expenses.todoState)
 
   const totalCredit = credit.reduce((acc, curr)=>{
@@ -38,16 +49,18 @@ export const Expense = () => {
   return (
     <div className='expense-container'>
       <Slider {...settings}>
-        { expensearray.map(item=>{
+      {
+        expensearray.map((item)=>{
           return(
-            <div className='Total' id='Total'>
-            <span className='balance'>{item.type}</span>
-            <span>Rs.{item.money}</span>
-          </div>
+            <Custom item={item}/>
           )
         })
-        }
+      }
+        
+       
       </Slider>
     </div>
   )
 }
+
+export default Expense
