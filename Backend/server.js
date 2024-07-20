@@ -12,6 +12,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const mongourl = process.env.MONGOURL;
+console.log(mongourl)
 const jwt_secret = process.env.JWT_SECRET || "secret";
 
 mongoose.connect(mongourl);
@@ -133,8 +134,7 @@ app.post('/signup', async(req, res)=>{
 
 app.post('/login', async(req, res)=>{
   const {user, email, pass} = req.body;
-  console.log(res)
-  console.log(res.headers)
+  console.log(res.header)
   try {
     const existingUser = await User.findOne({email});
 
