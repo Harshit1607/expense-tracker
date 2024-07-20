@@ -152,7 +152,7 @@ app.post('/login', async(req, res)=>{
 
     res.json({existingUser, token, message: 'logged in'})
     
-  } catch (error) {
+  } catch (err) {
     console.log(err)
   }  
 })
