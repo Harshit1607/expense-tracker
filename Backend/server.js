@@ -13,6 +13,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const mongopass = process.env.MONGOPASS;
+const jwt_secret = process.env.JWT_SECRET || "secret";
 
 mongoose.connect(`mongodb+srv://harshu:${mongopass}@expensecluster.h93exru.mongodb.net/?retryWrites=true&w=majority&appName=ExpenseCluster`);
 
@@ -60,7 +61,6 @@ const User = mongoose.model("User", userSchema);
 app.get("/", cors(), auth, async (req, res)=>{
   const userId = (req.query.userId)
   try{
-    console.log(userId)
     const objectid = new mongoose.Types.ObjectId(userId);
     const expenses = await Expense.find({userId: objectid});
     res.json(expenses);
@@ -112,7 +112,7 @@ app.post('/signup', async(req, res)=>{
     const newUser = new User({user, email, pass: hashedpass});
     await newUser.save();
 
-    const token = jwt.sign({email: newUser.email, id: newUser._id}, 'secret', { expiresIn: '1h' })
+    const token = jwt.sign({email: newUser.email, id: newUser._id}, jwt_secret, { expiresIn: '1h' })
 
     return res.json({newUser, token, message: 'signed up'})
     
@@ -137,7 +137,7 @@ app.post('/login', async(req, res)=>{
       return res.status(401).json({message: 'Pass incorrect'})
     }
 
-    const token =  jwt.sign({email: existingUser.email, id: existingUser._id}, 'secret', { expiresIn: '1h' })
+    const token =  jwt.sign({email: existingUser.email, id: existingUser._id}, jwt_secret, { expiresIn: '1h' })
 
     res.json({existingUser, token, message: 'logged in'})
     
@@ -153,7 +153,7 @@ async function auth(req, res, next) {
     return res.status(401).json({message: 'authprization failed'})
   }
   try {
-    const decoded = jwt.verify(token, 'secret');
+    const decoded = jwt.verify(token, jwt_secret);
     req.user = decoded;
     next();
   } catch (error) {
