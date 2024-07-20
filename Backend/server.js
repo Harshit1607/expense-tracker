@@ -22,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const corsOptions = {
   Origin: "https://expense-tracker-8mdc.onrender.com",
-  Credentials: true
+  Credentials: true,
+  methods: ['GET', 'DELETE', 'HEAD', 'OPTIONS', 'POST'],
 }
 
 app.use(cors(corsOptions))
@@ -126,6 +127,8 @@ app.post('/signup', async(req, res)=>{
     console.log(err);
   }
 })
+
+app.options('/login', cors(corsOptions));
 
 app.post('/login', async(req, res)=>{
   const {user, email, pass} = req.body;
