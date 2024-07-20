@@ -3,6 +3,8 @@ import axios from "axios";
 
 const API_URL=process.env.REACT_APP_API_URL;
 
+console.log(API_URL)
+
 export const fetchExpenses = createAsyncThunk('expenses/fetchExpenses', async (userId)=>{
 try{  
   const result = await axios.get(API_URL, {params: {
