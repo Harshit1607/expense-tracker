@@ -4,12 +4,17 @@ import mongoose from "mongoose";
 import cors from 'cors'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv';
+import path from 'path'
+
+dotenv.config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
+const mongopass = process.env.MONGOPASS;
 
-mongoose.connect('mongodb://localhost:27017/expense-tracker');
+mongoose.connect(`mongodb+srv://harshu:${mongopass}@expensecluster.h93exru.mongodb.net/?retryWrites=true&w=majority&appName=ExpenseCluster`);
 
 
 app.use(bodyParser.json());
