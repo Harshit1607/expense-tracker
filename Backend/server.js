@@ -22,17 +22,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req,res,next)=>{
   res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', '*');
   next(); 
 })
 
-const corsOptions = {
-  origin: "https://expense-tracker-8mdc.onrender.com",
-  credentials: true,
-  methods: ['GET', 'DELETE', 'HEAD', 'OPTIONS', 'POST'],
-}
+// const corsOptions = {
+//   origin: "https://expense-tracker-8mdc.onrender.com",
+//   credentials: true,
+//   methods: ['GET', 'DELETE', 'HEAD', 'OPTIONS', 'POST'],
+// }
 
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 
 const expenseSchema = new mongoose.Schema({
   text : {
@@ -69,7 +70,7 @@ const userSchema = new mongoose.Schema({
 const Expense = mongoose.model("Expense", expenseSchema);
 const User = mongoose.model("User", userSchema);
 
-app.options('/', cors(corsOptions));
+// app.options('/', cors(corsOptions));
 
 app.get("/", auth, async (req, res)=>{
   const userId = (req.query.userId)
@@ -135,7 +136,7 @@ app.post('/signup', async(req, res)=>{
   }
 })
 
-app.options('/login', cors(corsOptions));
+// app.options('/login', cors(corsOptions));
 
 app.post('/login', async(req, res)=>{
   const {user, email, pass} = req.body;
