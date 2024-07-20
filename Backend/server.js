@@ -12,10 +12,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-const mongopass = process.env.MONGOPASS;
+const mongourl = process.env.MONGOURL;
 const jwt_secret = process.env.JWT_SECRET || "secret";
 
-mongoose.connect(`mongodb+srv://harshu:${mongopass}@expensecluster.h93exru.mongodb.net/?retryWrites=true&w=majority&appName=ExpenseCluster`);
+mongoose.connect(mongourl);
 
 
 app.use(bodyParser.json());
@@ -162,6 +162,6 @@ async function auth(req, res, next) {
 
 }
 
-app.listen(port,  () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
 })
