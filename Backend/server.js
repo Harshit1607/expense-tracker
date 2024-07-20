@@ -20,20 +20,25 @@ mongoose.connect(mongourl);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req,res,next)=>{
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  next(); 
-})
+// Apply CORS middleware globally with options
+const corsOptions = {
+  origin: 'https://expense-tracker-8mdc.onrender.com', // Ensure no trailing slash
+  optionsSuccessStatus: 200,
+  credentials: true // Enable credentials if needed
+};
+app.use(cors(corsOptions));
 
-// const corsOptions = {
-//   origin: "https://expense-tracker-8mdc.onrender.com",
-//   credentials: true,
-//   methods: ['GET', 'DELETE', 'HEAD', 'OPTIONS', 'POST'],
-// }
-
-// app.use(cors(corsOptions))
+// Middleware to handle CORS headers for preflight requests
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', corsOptions.origin);
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true'); // If credentials (cookies, HTTP authentication) are needed
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 const expenseSchema = new mongoose.Schema({
   text : {
