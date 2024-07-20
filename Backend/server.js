@@ -5,7 +5,6 @@ import cors from 'cors'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv';
-import path from 'path'
 
 dotenv.config();
 
@@ -69,7 +68,7 @@ app.get("/", cors(), auth, async (req, res)=>{
   }
 })
 
-app.post("/", async (req, res)=>{
+app.post("/", cors(), async (req, res)=>{
   const newText = req.body.text;
   const newMoney = req.body.money;
   const userId = req.body.userId
@@ -88,7 +87,7 @@ app.post("/", async (req, res)=>{
   }
 })
 
-app.delete("/:id", async (req, res)=>{
+app.delete("/:id", cors(), async (req, res)=>{
   const userId = req.body.userId;
   const id = req.params.id;
   try{
@@ -100,7 +99,7 @@ app.delete("/:id", async (req, res)=>{
   }
 })
 
-app.post('/signup', async(req, res)=>{
+app.post('/signup', cors(), async(req, res)=>{
   const {user, email, pass} = req.body;
   try{
     const existingUser = await User.findOne({email});
@@ -122,7 +121,7 @@ app.post('/signup', async(req, res)=>{
   }
 })
 
-app.post('/login', async(req, res)=>{
+app.post('/login', cors(), async(req, res)=>{
   const {user, email, pass} = req.body;
   try {
     const existingUser = await User.findOne({email});
