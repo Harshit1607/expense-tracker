@@ -140,6 +140,8 @@ app.post('/signup', async(req, res)=>{
 
 app.post('/login', async(req, res)=>{
   const {user, email, pass} = req.body;
+  console.log(res)
+  console.log(res.headers)
   try {
     const existingUser = await User.findOne({email});
 
