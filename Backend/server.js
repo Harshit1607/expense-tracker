@@ -63,6 +63,7 @@ const userSchema = new mongoose.Schema({
 const Expense = mongoose.model("Expense", expenseSchema);
 const User = mongoose.model("User", userSchema);
 
+app.options('/', cors(corsOptions));
 
 app.get("/", auth, async (req, res)=>{
   const userId = (req.query.userId)
