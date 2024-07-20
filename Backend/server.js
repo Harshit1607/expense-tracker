@@ -21,8 +21,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const corsOptions = {
-  Origin: "https://expense-tracker-8mdc.onrender.com",
-  Credentials: true,
+  origin: "https://expense-tracker-8mdc.onrender.com",
+  credentials: true,
   methods: ['GET', 'DELETE', 'HEAD', 'OPTIONS', 'POST'],
 }
 
