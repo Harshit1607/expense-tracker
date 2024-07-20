@@ -20,6 +20,12 @@ mongoose.connect(mongourl);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use((req,res,next)=>{
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+  next(); 
+})
+
 const corsOptions = {
   origin: "https://expense-tracker-8mdc.onrender.com",
   credentials: true,
