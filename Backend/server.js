@@ -19,10 +19,7 @@ mongoose.connect(mongourl);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({
-  origin: 'https://expense-tracker-8mdc.onrender.com',
-  optionsSuccessStatus: 200
-}))
+app.use(cors())
 
 const expenseSchema = new mongoose.Schema({
   text : {
@@ -60,7 +57,7 @@ const Expense = mongoose.model("Expense", expenseSchema);
 const User = mongoose.model("User", userSchema);
 
 
-app.get("/", cors(), auth, async (req, res)=>{
+app.get("/", auth, async (req, res)=>{
   const userId = (req.query.userId)
   try{
     const objectid = new mongoose.Types.ObjectId(userId);
@@ -71,7 +68,7 @@ app.get("/", cors(), auth, async (req, res)=>{
   }
 })
 
-app.post("/", cors(), async (req, res)=>{
+app.post("/",  async (req, res)=>{
   const newText = req.body.text;
   const newMoney = req.body.money;
   const userId = req.body.userId
@@ -90,7 +87,7 @@ app.post("/", cors(), async (req, res)=>{
   }
 })
 
-app.delete("/:id", cors(), async (req, res)=>{
+app.delete("/:id", async (req, res)=>{
   const userId = req.body.userId;
   const id = req.params.id;
   try{
@@ -102,7 +99,7 @@ app.delete("/:id", cors(), async (req, res)=>{
   }
 })
 
-app.post('/signup', cors(), async(req, res)=>{
+app.post('/signup', async(req, res)=>{
   const {user, email, pass} = req.body;
   try{
     const existingUser = await User.findOne({email});
@@ -124,7 +121,7 @@ app.post('/signup', cors(), async(req, res)=>{
   }
 })
 
-app.post('/login', cors(), async(req, res)=>{
+app.post('/login', async(req, res)=>{
   const {user, email, pass} = req.body;
   try {
     const existingUser = await User.findOne({email});
