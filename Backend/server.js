@@ -19,7 +19,10 @@ mongoose.connect(mongourl);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors({
+  origin: 'https://expense-tracker-8mdc.onrender.com/',
+  optionsSuccessStatus: 200
+}))
 
 const expenseSchema = new mongoose.Schema({
   text : {
