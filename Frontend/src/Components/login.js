@@ -28,7 +28,7 @@ export const Login = () => {
     dispatch(login({user, email, pass}));
     setTimeout(()=>{
       navigate('/')
-    }, 1000);
+    }, 2000);
   }
 
 

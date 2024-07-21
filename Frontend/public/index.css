@@ -369,8 +369,8 @@ code {
   .expense-tracker,
   .add-container,
   .Auth-container {
-    height: 100vh;
-    max-height: none;
+    min-height: 500px;
+    max-height: 530px;
   }
 }
 

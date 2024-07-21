@@ -27,7 +27,7 @@ export const Signup = () => {
     dispatch(signup({user, email, pass}));
     setTimeout(()=>{
       navigate('/')
-    }, 1000);
+    }, 2000);
   }
 
 
