@@ -227,6 +227,7 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   border: solid;
   border-radius: 25px;
   background-color: #14121D;
@@ -235,10 +236,10 @@ code {
 
 .add-heading{
   width: 100%;
-  height: 50px;
+  height: 10%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 0;
   margin: 0;
@@ -246,6 +247,7 @@ code {
   font-weight: 500;
   font-style: normal;
   color: #c6c6cb;
+  margin-bottom: 40px;
 }
 
 .add-heading button{
@@ -259,17 +261,16 @@ code {
 
 .add-input{
   width: 100%;
-  height: 100px;
+  height: 15%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  
 }
 
 .add-input input{
   width: 80%;
-  height: 30px;
+  height: 40px;
   padding-left: 10px;
   border-radius: 10px;
   background-color: #c6c6cb;
@@ -280,26 +281,38 @@ code {
 
 .numpad{
   width: 100%;
-  height: 380px;
+  height: 40%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
 }
 
 .numpad-button{
-  background-color: #1B1B27;
+  background-color: #14121D;
   color: #c6c6cb;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.2px solid #c6c6cb;
+  border: none;
+}
+.add-expense{
+  background-color: #9C80E7;
+  border: none;
+  color: #1D0A4C;
+  height: 40px;
+  width: 70%;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 .corner-left{
-  border-bottom-left-radius: 25px;
+  border-bottom-left-radius: 20px;
 }
 .corner-right{
-  border-bottom-right-radius: 25px;
+  border-bottom-right-radius: 20px;
 }
 
 

@@ -63,21 +63,20 @@ export const Addcontainer = () => {
     }}>
       <div className='add-heading'>
         <ArrowBackIcon onClick={handleHide} style={{'cursor': 'pointer', 'marginLeft':'10px'}}/>
-        {/* <h2>Add Expenses</h2> */}
-        <AddIcon onClick={addExpense} style={{'cursor': 'pointer', 'marginRight':'10px'}}/>
       </div>
       <div className='add-input'>
-        <span>
+        {/* <span>
           Amount
-        </span>
-        <input placeholder='money...' value={money} onChange={handleMoney}/>
+        </span> */}
+        <input placeholder='Amount...' value={money} onChange={handleMoney}/>
       </div>
       <div className='add-input'>
-        <span>
+        {/* <span>
           Expenses made for?
-        </span>
-        <input placeholder='text...' value={text} onChange={handleText} />
+        </span> */}
+        <input placeholder='Made for...' value={text} onChange={handleText} />
       </div>
+      <button className='add-expense' onClick={addExpense}>Add Expense</button>
       <div className='numpad'>
         <button className='numpad-button' onClick={numPad} value='1'>1</button>
         <button className='numpad-button' onClick={numPad} value='2'>2</button>
