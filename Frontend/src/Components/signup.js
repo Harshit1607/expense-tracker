@@ -11,6 +11,14 @@ export const Signup = () => {
   const[email, setEmail]=useState("");
   const[pass, setPass]=useState("");
 
+  const token = localStorage.getItem('token')
+
+  useEffect({
+    if(token){
+    navigate('/');
+    }
+  }, [token])
+
   function handleUser(e){
     const newText = e.target.value;
     setUser(newText);
@@ -25,9 +33,6 @@ export const Signup = () => {
   }
   function handleSubmit(){
     dispatch(signup({user, email, pass}));
-    setTimeout(()=>{
-      navigate('/')
-    }, 2000);
   }
 
 

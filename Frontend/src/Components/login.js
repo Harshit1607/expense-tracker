@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom'
 import { login } from '../Features/trackerSlice.js';
@@ -7,6 +7,13 @@ export const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token')
+
+  useEffect({
+    if(token){
+    navigate('/');
+    }
+  }, [token])
 
   const[user, setUser]=useState("");
   const[email, setEmail]=useState("");
@@ -26,9 +33,6 @@ export const Login = () => {
   }
   async function handleSubmit(e){
     dispatch(login({user, email, pass}));
-    setTimeout(()=>{
-      navigate('/')
-    }, 2000);
   }
 
 
