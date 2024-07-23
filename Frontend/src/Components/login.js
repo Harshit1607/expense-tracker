@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom'
 import { login } from '../Features/trackerSlice.js';
 
@@ -7,9 +7,9 @@ export const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = localStorage.getItem('token')
+  const token = !!useSelector(state=>state.expenses.userState.token);
 
-  useEffect({
+  useEffect(()=>{
     if(token){
     navigate('/');
     }

@@ -63,9 +63,9 @@ const initialState = {
   debit: [],
   },
   userState : {
-    user: localStorage.getItem('user')? localStorage.getItem('user') : '',
-    token: localStorage.getItem('token')? localStorage.getItem('token') : '',
-    userId: localStorage.getItem('userId')? localStorage.getItem('userId') : '',
+    user: localStorage.getItem('user')? localStorage.getItem('user') : null,
+    token: localStorage.getItem('token')? localStorage.getItem('token') : null,
+    userId: localStorage.getItem('userId')? localStorage.getItem('userId') : null,
   }, 
   addContainer :{
     hidden: true
@@ -78,7 +78,12 @@ const trackerSlice = createSlice({
   reducers: {
     hide: (state)=>{
       state.addContainer.hidden = !state.addContainer.hidden
-    }
+    }, 
+    logout: (state) => {
+      state.userState.token = null;
+      state.userState.userId = null;
+      state.userState.user = null;
+    },
   },
   extraReducers: builder => {
     builder
@@ -150,4 +155,4 @@ const trackerSlice = createSlice({
 })
 
 export default trackerSlice.reducer;
-export const {hide} = trackerSlice.actions;
+export const {hide, logout} = trackerSlice.actions;

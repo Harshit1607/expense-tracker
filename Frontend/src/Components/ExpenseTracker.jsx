@@ -4,7 +4,7 @@ import { Statements } from "./Statements.js";
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { Addcontainer } from './Addcontainer.jsx';
-import { hide } from '../Features/trackerSlice.js';
+import { hide, logout } from '../Features/trackerSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoutIcon from '@mui/icons-material/Logout.js';
 import AddIcon from '@mui/icons-material/Add';
@@ -21,9 +21,11 @@ export const ExpenseTracker = () => {
     const now = Date.now() / 1000
 
     if(now>tokenexp){
-      localStorage.setItem('token', '')
-      localStorage.setItem('userId', '')
-      navigate('/login')
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('user');
+        dispatch(logout());
+        navigate('/login')
     }
   }, [])
   return (
@@ -36,9 +38,11 @@ export const ExpenseTracker = () => {
           <span>Hello</span>
           <span className='name'>{user}</span>
         </div>
-        <LogoutIcon onClick={()=>{localStorage.setItem('token', '')
-           localStorage.setItem('userId', '')
-           localStorage.setItem('user', '')
+        <LogoutIcon onClick={()=>{
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('user');
+          dispatch(logout());
           navigate('/login')
       }} style={{'cursor': 'pointer'}}/>
       </div>

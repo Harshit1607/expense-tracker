@@ -50,9 +50,9 @@ function Expense(){
     <div className='expense-container'>
       <Slider {...settings}>
       {
-        expensearray.map((item)=>{
+        expensearray.map((item, index)=>{
           return(
-            <Custom item={item}/>
+            <Custom item={item} key={index}/>
           )
         })
       }

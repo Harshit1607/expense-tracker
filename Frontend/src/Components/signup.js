@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '../Features/trackerSlice.js';
 
@@ -11,9 +11,9 @@ export const Signup = () => {
   const[email, setEmail]=useState("");
   const[pass, setPass]=useState("");
 
-  const token = localStorage.getItem('token')
+  const token = !!useSelector(state=>state.expenses.userState.token);
 
-  useEffect({
+  useEffect(()=>{
     if(token){
     navigate('/');
     }
