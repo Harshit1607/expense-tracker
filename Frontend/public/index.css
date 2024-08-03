@@ -2,6 +2,10 @@ button {
   cursor: pointer;
 }
 
+input:focus{
+  outline: none;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -372,6 +376,24 @@ code {
   cursor: pointer
 }
 
+.auth-pass-container{
+  width: calc(70% + 22px);
+  height: 35px;
+  position: relative;
+}
+.auth-pass-container>input{
+  width: 90.5%;
+  height: 100%;
+}
+.auth-eye{
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  z-index: 10;
+  cursor: pointer;
+}
 
 .Auth-right input::placeholder, .Auth-right input[type='text']{
   font-family: "Saira", sans-serif;

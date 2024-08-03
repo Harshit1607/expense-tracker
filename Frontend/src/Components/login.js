@@ -18,6 +18,7 @@ export const Login = () => {
   const[user, setUser]=useState("");
   const[email, setEmail]=useState("");
   const[pass, setPass]=useState("");
+  const[hidePass,setHidePass] = useState(true)
 
   function handleUser(e){
     const newText = e.target.value;
@@ -31,6 +32,9 @@ export const Login = () => {
     const newText = e.target.value;
     setPass(newText);
   }
+  function handleHidepass(){
+    setHidePass(!hidePass)
+  }
   async function handleSubmit(e){
     dispatch(login({user, email, pass}));
   }
@@ -42,7 +46,10 @@ export const Login = () => {
       <h2>Login</h2>
       <input placeholder='username..' onChange={handleUser}/>
       <input placeholder='email...' onChange={handleEmail}/>
-      <input placeholder='password...' onChange={handlePass} type='password'/>
+      <div className="auth-pass-container">
+        <input placeholder='password...' onChange={handlePass} type={hidePass? 'password' : 'text'} className='auth-pass'/>
+        <img src={hidePass?'https://cdn-icons-png.flaticon.com/256/367/367070.png': 'https://www.svgrepo.com/show/325176/eye-off.svg'} className='auth-eye' onClick={handleHidepass}/>
+      </div>
       <button onClick={handleSubmit}>Login</button>
       </div>
       <div className='Auth-left'>
