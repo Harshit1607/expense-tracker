@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const corsOptions = {
-  origin: 'https://expense-tracker-server-7feu.onrender.com/', // Ensure no trailing slash
+  origin: 'https://expense-tracker-8mdc.onrender.com/', // Ensure no trailing slash
   methods: 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
   allowedHeaders: 'Content-Type, Authorization',
   credentials: true // Enable credentials if needed
